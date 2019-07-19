@@ -16,9 +16,7 @@ export default class App extends Component {
             Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
             ...Ionicons.font
         });
-        setTimeout(() => {
-            this.setState({isReady: true})
-        }, 1000)
+        this.setState({isReady: true})
     };
 
     render() {
@@ -33,12 +31,17 @@ export default class App extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.titleText}>GoodPet</Text>
-                <Text>Hello world!</Text>
+                <Text>Witaj w testowej wersji aplikacji!</Text>
+
                 <Text>{"\n"}</Text>
                 <Image source={require(mainLogoSourcePath)} style={styles.mainLogo}/>
+                <Text>{"\n"}</Text>
 
-                <Button rounded>
-                    <Text>Primary</Text>
+                <Button light style={styles.buttonLogin}>
+                    <Text>Zaloguj się</Text>
+                </Button>
+                <Button primary style={styles.buttonRegister}>
+                    <Text style={styles.primaryButtonTextColor}>Zarejestruj się</Text>
                 </Button>
             </View>
         );
@@ -48,6 +51,7 @@ export default class App extends Component {
 const dimensions = Dimensions.get('window');
 const imageHeight = dimensions.width / 2;
 const imageWidth = dimensions.width / 2;
+const buttonWidth = dimensions.width / 2 - 20;
 
 const styles = StyleSheet.create({
     titleText: {
@@ -63,5 +67,21 @@ const styles = StyleSheet.create({
     mainLogo: {
         height: imageHeight,
         width: imageWidth,
-    }
+    },
+    buttonLogin: {
+        alignSelf: 'center',
+        padding: 10,
+        width: buttonWidth,
+        marginBottom: 10,
+        justifyContent: 'center'
+    },
+    buttonRegister: {
+        alignSelf: 'center',
+        padding: 10,
+        width: buttonWidth,
+        justifyContent: 'center'
+    },
+    primaryButtonTextColor: {
+        color: '#fff'
+    },
 });
