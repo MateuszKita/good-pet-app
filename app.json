@@ -9,9 +9,12 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/main-logo.png",
+    "android": {
+      "package": "com.entleteam.goodpet"
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -24,8 +27,9 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.entleteam.goodpet",
       "supportsTablet": true
     },
-    "description": ""
+    "description": "Mobile app to maintain our lovely pets."
   }
 }
