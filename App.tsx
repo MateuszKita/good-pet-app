@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
 import {ActivityIndicator} from 'react-native'
 import {View, Image, Text} from 'react-native';
-import {Button} from 'native-base';
 import {loadAsync} from 'expo-font'
 import {Ionicons} from "@expo/vector-icons";
 import {genericStyle} from "./styles/generic.style";
 import {textStyle} from "./styles/text.style";
 import {imagesStyle} from "./styles/images.style";
-import {buttonsStyle} from "./styles/buttons.style";
-import PrimaryButton from "./shared/components/buttons/primary-button.component";
+import GpButton from "./shared/components/button/button.component";
+import {BUTTON_TYPE} from "./shared/components/button/button.constants";
 
 export default class App extends Component {
     state = {
@@ -46,11 +45,10 @@ export default class App extends Component {
                 <Image source={require(mainLogoSourcePath)} style={imagesStyle.mainLogo}/>
                 <Text>{"\n"}</Text>
 
-                <PrimaryButton/>
+                <GpButton type={BUTTON_TYPE.PRIMARY} content={"Stwórz konto"} />
 
-                <Button light style={{...buttonsStyle.secondaryOnLightBackground, ...buttonsStyle.centerAligned}}>
-                    <Text style={buttonsStyle.secondaryButtonText}>Logowanie</Text>
-                </Button>
+                <GpButton type={BUTTON_TYPE.SECONDARY} content={"Zaloguj się"}/>
+
             </View>
         );
     }
