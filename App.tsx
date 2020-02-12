@@ -1,22 +1,23 @@
 import React, {Component} from 'react'
 import {ActivityIndicator} from 'react-native'
-import {StyleSheet, View, Image, Dimensions, Text} from 'react-native';
+import {View, Image, Text} from 'react-native';
 import {Button} from 'native-base';
-import * as Font from 'expo-font'
+import {loadAsync} from 'expo-font'
 import {Ionicons} from "@expo/vector-icons";
 import {genericStyle} from "./styles/generic.style";
 import {textStyle} from "./styles/text.style";
 import {imagesStyle} from "./styles/images.style";
 import {buttonsStyle} from "./styles/buttons.style";
+import PrimaryButton from "./shared/components/buttons/primary-button.component";
 
 export default class App extends Component {
     state = {
         isReady: false
     };
 
-    componentWillMount = async () => {
+    componentDidMount = async () => {
         try {
-            await Font.loadAsync({
+            await loadAsync({
                 Roboto: require('native-base/Fonts/Roboto.ttf'),
                 Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
                 ...Ionicons.font
@@ -45,9 +46,8 @@ export default class App extends Component {
                 <Image source={require(mainLogoSourcePath)} style={imagesStyle.mainLogo}/>
                 <Text>{"\n"}</Text>
 
-                <Button primary style={{...buttonsStyle.primaryOnLightBackground, ...buttonsStyle.centerAligned}}>
-                    <Text style={buttonsStyle.primaryButtonText}>Stwórz konto</Text>
-                </Button>
+                <PrimaryButton/>
+
                 <Button light style={{...buttonsStyle.secondaryOnLightBackground, ...buttonsStyle.centerAligned}}>
                     <Text style={buttonsStyle.secondaryButtonText}>Logowanie</Text>
                 </Button>
