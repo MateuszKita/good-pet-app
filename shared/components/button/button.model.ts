@@ -1,7 +1,10 @@
 import {BUTTON_TYPE} from "./button.constants";
 
 export interface GpButtonProps {
-    type: BUTTON_TYPE,
+    type: BUTTON_TYPE;
+
+    onPress?: (...args) => any;
+
     content?: string;
 }
 

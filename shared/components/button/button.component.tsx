@@ -46,7 +46,7 @@ export default class GpButton extends Component<GpButtonProps> {
 
     render() {
         return (
-            <Button style={this.state.buttonStyle}>
+            <Button style={this.state.buttonStyle} onPress={this.props.onPress}>
                 <Text style={this.state.buttonTextStyle}>{this.props.content}</Text>
             </Button>
         );
