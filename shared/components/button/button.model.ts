@@ -6,10 +6,12 @@ export interface GpButtonProps {
     onPress?: (...args) => any;
 
     content?: string;
+    width?: number;
 }
 
 export interface GpButtonStyle {
     buttonType: BUTTON_TYPE,
     buttonStyle?: Object | undefined,
-    buttonTextStyle?: Object | undefined
+    buttonTextStyle?: Object | undefined,
+    width?: number,
 }
