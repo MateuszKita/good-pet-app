@@ -3,15 +3,21 @@
     "name": "GoodPet",
     "slug": "good-pet-app",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
+    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.0.22",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/main-logo.png",
+    "android": {
+      "package": "com.entleteam.goodpet"
+    },
+    "androidNavigationBar": {
+      "visible": false
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -24,7 +30,9 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.entleteam.goodpet",
       "supportsTablet": true
-    }
+    },
+    "description": "Mobile app to maintain our lovely pets."
   }
 }
