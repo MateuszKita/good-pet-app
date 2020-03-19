@@ -15,6 +15,9 @@
     "android": {
       "package": "com.entleteam.goodpet"
     },
+    "androidNavigationBar": {
+      "visible": false
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
