@@ -2,7 +2,7 @@ import {INPUT_LABEL_TYPE} from "./input.constants";
 
 export interface GpInputProps {
     label: string;
-    labelType: INPUT_LABEL_TYPE;
+    labelType?: INPUT_LABEL_TYPE;
     valid?: boolean;
 }
 //

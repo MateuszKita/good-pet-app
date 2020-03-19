@@ -11,14 +11,12 @@ export default class GpInput extends Component<GpInputProps> {
         valid: undefined
     };
 
-    private newState: GpInputProps;
-
     constructor(props: GpInputProps) {
         super(props);
 
-        // if (props.type) {
-        //     this.state.buttonType = props.type
-        // }
+        if (props.label) {
+            this.state.label = props.label
+        }
 
     }
 
