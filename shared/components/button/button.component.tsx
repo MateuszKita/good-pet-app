@@ -10,7 +10,8 @@ export default class GpButton extends Component<GpButtonProps> {
     public state: GpButtonStyle = {
         buttonType: BUTTON_TYPE.PRIMARY,
         buttonStyle: undefined,
-        buttonTextStyle: undefined
+        buttonTextStyle: undefined,
+        width: undefined
     };
 
     private newState: GpButtonStyle;
@@ -20,6 +21,10 @@ export default class GpButton extends Component<GpButtonProps> {
 
         if (props.type) {
             this.state.buttonType = props.type
+        }
+
+        if (props.width) {
+            this.state.width = props.width
         }
 
     }
@@ -41,6 +46,9 @@ export default class GpButton extends Component<GpButtonProps> {
                 this.newState.buttonTextStyle = {...buttonsStyle.secondaryButtonText};
                 break;
             default:
+        }
+        if (this.state.width) {
+            this.newState.buttonStyle = {...this.newState.buttonStyle, width: this.state.width};
         }
     }
 
