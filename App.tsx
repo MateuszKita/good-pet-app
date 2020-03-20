@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {ActivityIndicator} from 'react-native'
+import {ActivityIndicator, Text} from 'react-native'
 import {View} from 'react-native';
 import {loadAsync} from 'expo-font'
 import {Ionicons} from "@expo/vector-icons";
@@ -12,6 +12,7 @@ import Register from "./views/start/register/Register";
 import "react-native-gesture-handler";
 import "./config/firebase.config"
 
+const appInfo: any = require("./app.json");
 const Stack = createStackNavigator();
 
 export default class App extends Component {
@@ -49,11 +50,13 @@ export default class App extends Component {
                                       name="Register"
                                       component={Register}/>
                     </Stack.Navigator>
+                    <Text style={{position: "absolute", top: 30, right: 10, color: "gray"}}>v. {appInfo.expo.version}</Text>
                 </NavigationContainer>
             )
             : (
                 <View style={genericStyle.container}>
                     <ActivityIndicator/>
+                    <Text style={{position: "absolute", top: 30, right: 10, color: "gray"}}>v. {appInfo.expo.version}</Text>
                 </View>
             );
     }
