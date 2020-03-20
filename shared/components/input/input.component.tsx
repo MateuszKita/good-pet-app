@@ -8,7 +8,8 @@ export default class GpInput extends Component<GpInputProps> {
     public state: GpInputProps = {
         label: "",
         labelType: INPUT_LABEL_TYPE.FLOATING,
-        valid: undefined
+        valid: undefined,
+        secureTextEntry: false
     };
 
     constructor(props: GpInputProps) {
@@ -18,28 +19,19 @@ export default class GpInput extends Component<GpInputProps> {
             this.state.label = props.label
         }
 
+        if (props.labelType) {
+            this.state.labelType = props.labelType
+        }
+
+        if (props.valid) {
+            this.state.valid = props.valid
+        }
+
+        if (props.secureTextEntry) {
+            this.state.secureTextEntry = props.secureTextEntry
+        }
+
     }
-
-    //
-    // componentDidMount = async () => {
-    //     this.newState = {...this.state};
-    //     this.setButtonStyles();
-    //     this.setState(this.newState);
-    // };
-
-    // private setButtonStyles(): void {
-    //     switch (this.newState.buttonType) {
-    //         case BUTTON_TYPE.PRIMARY:
-    //             this.newState.buttonStyle = {...buttonsStyle.primaryOnLightBackground, ...buttonsStyle.centerAligned};
-    //             this.newState.buttonTextStyle = {...buttonsStyle.primaryButtonText};
-    //             break;
-    //         case BUTTON_TYPE.SECONDARY:
-    //             this.newState.buttonStyle = {...buttonsStyle.secondaryOnLightBackground, ...buttonsStyle.centerAligned};
-    //             this.newState.buttonTextStyle = {...buttonsStyle.secondaryButtonText};
-    //             break;
-    //         default:
-    //     }
-    // }
 
     render() {
         return (
@@ -49,7 +41,7 @@ export default class GpInput extends Component<GpInputProps> {
                   error={this.state.valid === false}
                   success={this.state.valid === true}>
                 <Label>{this.state.label}</Label>
-                <Input/>
+                <Input secureTextEntry={this.state.secureTextEntry} />
             </Item>
         );
     }

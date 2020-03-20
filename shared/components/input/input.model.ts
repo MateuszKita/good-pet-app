@@ -4,6 +4,7 @@ export interface GpInputProps {
     label: string;
     labelType?: INPUT_LABEL_TYPE;
     valid?: boolean;
+    secureTextEntry?: boolean;
 }
 //
 // export interface GpButtonStyle {

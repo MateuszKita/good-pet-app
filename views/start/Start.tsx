@@ -7,8 +7,6 @@ import GpButton from "../../shared/components/button/button.component";
 import {BUTTON_TYPE} from "../../shared/components/button/button.constants";
 import {database} from "firebase";
 
-const appInfo: any = require("../../app.json");
-
 export default class Start extends Component<any> {
 
     constructor(props) {
@@ -51,7 +49,6 @@ export default class Start extends Component<any> {
                           content={"Zaloguj się"}
                           onPress={() => this.props.navigation.navigate('Login')}/>
 
-                <Text style={{position: "absolute", top: 30, right: 10, color: "gray"}}>v. {appInfo.expo.version}</Text>
             </View>
         );
     }
