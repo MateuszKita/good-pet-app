@@ -6,6 +6,8 @@ import {INPUT_LABEL_TYPE} from "./input.constants";
 export default class GpInput extends Component<GpInputProps> {
 
     public state: GpInputProps = {
+        value: "",
+        onChangeValue: undefined,
         label: "",
         labelType: INPUT_LABEL_TYPE.FLOATING,
         valid: undefined,
@@ -15,20 +17,31 @@ export default class GpInput extends Component<GpInputProps> {
     constructor(props: GpInputProps) {
         super(props);
 
+        if (props.value) {
+            this.state.value = props.value;
+        }
+
+        if (props.onChangeValue) {
+            this.state.onChangeValue = (val) => {
+                this.setState({...this.state, value: val});
+                props.onChangeValue(val);
+            }
+        }
+
         if (props.label) {
-            this.state.label = props.label
+            this.state.label = props.label;
         }
 
         if (props.labelType) {
-            this.state.labelType = props.labelType
+            this.state.labelType = props.labelType;
         }
 
         if (props.valid) {
-            this.state.valid = props.valid
+            this.state.valid = props.valid;
         }
 
         if (props.secureTextEntry) {
-            this.state.secureTextEntry = props.secureTextEntry
+            this.state.secureTextEntry = props.secureTextEntry;
         }
 
     }
@@ -41,7 +54,8 @@ export default class GpInput extends Component<GpInputProps> {
                   error={this.state.valid === false}
                   success={this.state.valid === true}>
                 <Label>{this.state.label}</Label>
-                <Input secureTextEntry={this.state.secureTextEntry} />
+                <Input value={this.state.value} onChangeText={this.state.onChangeValue}
+                       secureTextEntry={this.state.secureTextEntry}/>
             </Item>
         );
     }

@@ -10,8 +10,10 @@ const {width, height} = Dimensions.get('window');
 
 export default class Login extends Component<any> {
 
-    public state: {containerHeight: number} = {
-        containerHeight: height
+    public state: { containerHeight: number, emailValue: string, passwordValue: string } = {
+        containerHeight: height,
+        emailValue: "",
+        passwordValue: ""
     };
 
     constructor(props: GpInputProps) {
@@ -29,6 +31,10 @@ export default class Login extends Component<any> {
             this.setState({containerHeight: height - event.endCoordinates.height});
         }
     }
+
+    onChangeEmailValue = value => this.setState({...this.state, emailValue: value});
+
+    onChangePasswordValue = value => this.setState({...this.state, passwordValue: value});
 
     componentDidMount = async () => {
         Keyboard.addListener('keyboardDidShow', this.onKeyboardShow.bind(this));
@@ -56,9 +62,15 @@ export default class Login extends Component<any> {
                             alignItems: "center",
                             marginBottom: 20
                         }}>
-                            <GpInput label="Adres e-mail"/>
+                            <GpInput value={this.state.emailValue}
+                                     onChangeValue={this.onChangeEmailValue}
+                                     label="Adres e-mail"/>
                         </View>
-                        <GpInput secureTextEntry={true} label="Hasło"/>
+                        <Text>{this.state.emailValue}</Text>
+                        <GpInput value={this.state.passwordValue}
+                                 onChangeValue={this.onChangePasswordValue}
+                                 secureTextEntry={true}
+                                 label="Hasło"/>
                     </View>
                     <View style={{
                         flexDirection: "row",
