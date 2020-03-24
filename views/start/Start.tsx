@@ -23,10 +23,6 @@ export default class Start extends Component<any> {
                 this.setState({message: snapshot.val()});
             }
         });
-
-        database().ref('users').on('value', (snapshot) => {
-            console.log("!!! users", snapshot)
-        });
     };
 
     render() {
