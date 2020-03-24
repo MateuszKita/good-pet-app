@@ -1,10 +1,13 @@
 import React, {Component} from "react";
-import {Dimensions, Keyboard, Text, View} from "react-native";
+import {Dimensions, Keyboard, View} from "react-native";
 import {BUTTON_TYPE} from "../../../shared/components/button/button.constants";
 import GpButton from "../../../shared/components/button/button.component";
 import GpInput from "../../../shared/components/input/input.component";
 import {GpInputProps} from "../../../shared/components/input/input.model";
 import {genericStyle} from "../../../styles/generic.style";
+import {auth, database} from "firebase";
+import {Toast} from "native-base";
+import {User} from "../../../shared/models/users.model";
 
 const {width, height} = Dimensions.get('window');
 
@@ -36,6 +39,43 @@ export default class Login extends Component<any> {
 
     onChangePasswordValue = value => this.setState({...this.state, passwordValue: value});
 
+    private handleLogin() {
+        auth()
+            .signInWithEmailAndPassword(this.state.emailValue, this.state.passwordValue)
+            .then(userCredential => {
+                Toast.show({
+                    text: "Successfully logged in",
+                    duration: 3000,
+                    position: "top",
+                    style: {
+                        backgroundColor: "green"
+                    },
+                    textStyle: {
+                        textAlign: "center"
+                    },
+                });
+                database().ref(`users/${userCredential.user.uid}`).set({
+                    uid: userCredential.user.uid,
+                    email: userCredential.user.email,
+                    displayName: userCredential.user.displayName
+                }).then(() => this.props.navigation.navigate("Main"));
+            })
+            .catch(error => {
+                console.log(error);
+                Toast.show({
+                    text: error.message || "Provided data is incorrect",
+                    duration: 3000,
+                    position: "top",
+                    style: {
+                        backgroundColor: "red"
+                    },
+                    textStyle: {
+                        textAlign: "center"
+                    }
+                });
+            })
+    }
+
     componentDidMount = async () => {
         Keyboard.addListener('keyboardDidShow', this.onKeyboardShow.bind(this));
         Keyboard.addListener('keyboardDidHide', this.onKeyboardHide.bind(this));
@@ -66,7 +106,6 @@ export default class Login extends Component<any> {
                                      onChangeValue={this.onChangeEmailValue}
                                      label="Adres e-mail"/>
                         </View>
-                        <Text>{this.state.emailValue}</Text>
                         <GpInput value={this.state.passwordValue}
                                  onChangeValue={this.onChangePasswordValue}
                                  secureTextEntry={true}
@@ -84,7 +123,7 @@ export default class Login extends Component<any> {
                         <GpButton type={BUTTON_TYPE.PRIMARY}
                                   width={width * 0.35}
                                   content={"Zaloguj się"}
-                                  onPress={() => this.props.navigation.navigate('Start')}/>
+                                  onPress={() => this.handleLogin()}/>
                     </View>
                 </View>
             </View>
