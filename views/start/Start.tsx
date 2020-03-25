@@ -5,7 +5,7 @@ import {textStyle} from "../../styles/text.style";
 import {imagesStyle} from "../../styles/images.style";
 import GpButton from "../../shared/components/button/button.component";
 import {BUTTON_TYPE} from "../../shared/components/button/button.constants";
-import {database} from "firebase";
+import {auth, database} from "firebase";
 
 export default class Start extends Component<any> {
 

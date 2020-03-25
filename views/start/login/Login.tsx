@@ -7,7 +7,6 @@ import {GpInputProps} from "../../../shared/components/input/input.model";
 import {genericStyle} from "../../../styles/generic.style";
 import {auth, database} from "firebase";
 import {Toast} from "native-base";
-import {User} from "../../../shared/models/users.model";
 
 const {width, height} = Dimensions.get('window');
 
@@ -112,18 +111,28 @@ export default class Login extends Component<any> {
                                  label="Hasło"/>
                     </View>
                     <View style={{
-                        flexDirection: "row",
+                        flexDirection: "column",
                         flexWrap: "nowrap",
+                        justifyContent: "flex-start",
                         flex: 1
                     }}>
-                        <GpButton type={BUTTON_TYPE.SECONDARY}
-                                  width={width * 0.35}
-                                  content={"Powrót"}
-                                  onPress={() => this.props.navigation.navigate('Start')}/>
-                        <GpButton type={BUTTON_TYPE.PRIMARY}
-                                  width={width * 0.35}
-                                  content={"Zaloguj się"}
-                                  onPress={() => this.handleLogin()}/>
+                        <View style={{
+                            flexDirection: "row",
+                            flexWrap: "nowrap",
+                            flex: 1
+                        }}>
+                            <GpButton type={BUTTON_TYPE.SECONDARY}
+                                      width={width * 0.35}
+                                      content={"Powrót"}
+                                      onPress={() => this.props.navigation.navigate('Start')}/>
+                            <GpButton type={BUTTON_TYPE.PRIMARY}
+                                      width={width * 0.35}
+                                      content={"Zaloguj się"}
+                                      onPress={() => this.handleLogin()}/>
+                        </View>
+                        <GpButton type={BUTTON_TYPE.TRANSPARENT}
+                                  content={"Nie pamiętam hasła"}
+                                  onPress={() => this.props.navigation.navigate("PasswordReset")}/>
                     </View>
                 </View>
             </View>

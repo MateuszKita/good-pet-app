@@ -43,10 +43,21 @@ export const buttonsStyle = StyleSheet.create({
         backgroundColor: secondaryAccent2,
         borderRadius: 5,
     },
+    transparent: {
+        padding: 10,
+        margin: 5,
+        width: buttonWidth,
+        justifyContent: 'center',
+        backgroundColor: "transparent",
+        borderRadius: 5,
+    },
     primaryButtonText: {
         color: textColorLight
     },
     secondaryButtonText: {
         color: textColorDark
+    },
+    transparentButtonText: {
+        color: "gray"
     },
 });

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Dimensions, Keyboard, View} from "react-native";
+import {Dimensions, Keyboard, Text, View} from "react-native";
 import {BUTTON_TYPE} from "../../../shared/components/button/button.constants";
 import GpButton from "../../../shared/components/button/button.component";
 import GpInput from "../../../shared/components/input/input.component";
@@ -10,12 +10,11 @@ import {Toast} from "native-base";
 
 const {width, height} = Dimensions.get('window');
 
-export default class Register extends Component<any> {
+export default class PasswordReset extends Component<any> {
 
-    public state: { containerHeight: number, emailValue: string, passwordValue: string } = {
+    public state: { containerHeight: number, emailValue: string } = {
         containerHeight: height,
-        emailValue: "",
-        passwordValue: ""
+        emailValue: ""
     };
 
     constructor(props: GpInputProps) {
@@ -34,25 +33,27 @@ export default class Register extends Component<any> {
         }
     }
 
-    private handleSignUp(): void {
+    onChangeEmailValue = value => this.setState({...this.state, emailValue: value});
+
+    private handleResetPassword() {
         auth()
-            .createUserWithEmailAndPassword(this.state.emailValue, this.state.passwordValue)
-            .then(credential => credential.user.sendEmailVerification())
+            .sendPasswordResetEmail(this.state.emailValue)
             .then(() => {
                 Toast.show({
-                    text: "Successfully created new account, verify your e-mail address",
-                    duration: 3000,
+                    text: "Wysłano e-mail z linkiem do resetu hasła na wskazany adres e-mail",
+                    duration: 5000,
                     position: "top",
                     style: {
-                        backgroundColor: "green"
+                        backgroundColor: "blue"
                     },
                     textStyle: {
                         textAlign: "center"
-                    }
+                    },
                 });
-                this.props.navigation.navigate('Login')
+                this.props.navigation.navigate("Login");
             })
             .catch(error => {
+                console.log(error);
                 Toast.show({
                     text: error.message || "Provided data is incorrect",
                     duration: 3000,
@@ -66,10 +67,6 @@ export default class Register extends Component<any> {
                 });
             })
     }
-
-    onChangeEmailValue = value => this.setState({...this.state, emailValue: value});
-
-    onChangePasswordValue = value => this.setState({...this.state, passwordValue: value});
 
     componentDidMount = async () => {
         Keyboard.addListener('keyboardDidShow', this.onKeyboardShow.bind(this));
@@ -90,21 +87,17 @@ export default class Register extends Component<any> {
                 }}>
                     <View style={{
                         flex: 1,
-                        justifyContent: "flex-end"
+                        justifyContent: "flex-end",
                     }}>
                         <View style={{
-                            flex: 0,
-                            alignItems: "center",
-                            marginBottom: 20
+                            paddingBottom: 60
                         }}>
-                            <GpInput value={this.state.emailValue}
-                                     onChangeValue={this.onChangeEmailValue}
-                                     label="Adres e-mail"/>
+                            <Text>Wpisz adres e-mail, który ma zostać wysłany link weryfikacyjny</Text>
                         </View>
-                        <GpInput value={this.state.passwordValue}
-                                 onChangeValue={this.onChangePasswordValue}
-                                 secureTextEntry={true}
-                                 label="Hasło"/>
+
+                        <GpInput value={this.state.emailValue}
+                                 onChangeValue={this.onChangeEmailValue}
+                                 label="E-mail"/>
                     </View>
                     <View style={{
                         flexDirection: "row",
@@ -114,11 +107,11 @@ export default class Register extends Component<any> {
                         <GpButton type={BUTTON_TYPE.SECONDARY}
                                   width={width * 0.35}
                                   content={"Powrót"}
-                                  onPress={() => this.props.navigation.navigate('Start')}/>
+                                  onPress={() => this.props.navigation.navigate("Start")}/>
                         <GpButton type={BUTTON_TYPE.PRIMARY}
                                   width={width * 0.35}
-                                  content={"Stwórz konto"}
-                                  onPress={() => this.handleSignUp()}/>
+                                  content={"Zaloguj się"}
+                                  onPress={() => this.handleResetPassword()}/>
                     </View>
                 </View>
             </View>
