@@ -7,12 +7,13 @@ import {genericStyle} from "./styles/generic.style";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import Start from "./views/start/Start";
-import Login from "./views/start/login/Login";
 import Register from "./views/start/register/Register";
 import "react-native-gesture-handler";
 import "./config/firebase.config"
 import {Root} from "native-base";
 import Main from "./views/main/Main";
+import Login from "./views/start/login/Login";
+import PasswordReset from "./views/start/password-reset/PasswordReset";
 
 const appInfo: any = require("./app.json");
 const Stack = createStackNavigator();
@@ -43,6 +44,7 @@ export default class App extends Component {
                 <Root>
                     <NavigationContainer>
                         <Stack.Navigator initialRouteName="Start" headerMode="none">
+
                             <Stack.Screen options={{}}
                                           name="Start"
                                           component={Start}/>
@@ -52,6 +54,10 @@ export default class App extends Component {
                             <Stack.Screen options={{}}
                                           name="Register"
                                           component={Register}/>
+                            <Stack.Screen options={{}}
+                                          name="PasswordReset"
+                                          component={PasswordReset}/>
+
                             <Stack.Screen options={{}}
                                           name="Main"
                                           component={Main}/>

@@ -45,7 +45,13 @@ export default class GpButton extends Component<GpButtonProps> {
                 this.newState.buttonStyle = {...buttonsStyle.secondaryOnLightBackground, ...buttonsStyle.centerAligned};
                 this.newState.buttonTextStyle = {...buttonsStyle.secondaryButtonText};
                 break;
+            case BUTTON_TYPE.TRANSPARENT:
+                this.newState.buttonStyle = {...buttonsStyle.transparent, ...buttonsStyle.centerAligned};
+                this.newState.buttonTextStyle = {...buttonsStyle.transparentButtonText};
+                break;
             default:
+                this.newState.buttonStyle = {...buttonsStyle.primaryOnLightBackground, ...buttonsStyle.centerAligned};
+                this.newState.buttonTextStyle = {...buttonsStyle.primaryButtonText};
         }
         if (this.state.width) {
             this.newState.buttonStyle = {...this.newState.buttonStyle, width: this.state.width};
@@ -54,7 +60,9 @@ export default class GpButton extends Component<GpButtonProps> {
 
     render() {
         return (
-            <Button style={this.state.buttonStyle} onPress={this.props.onPress}>
+            <Button style={this.state.buttonStyle}
+                    onPress={this.props.onPress}
+                    transparent={this.state.buttonType === BUTTON_TYPE.TRANSPARENT}>
                 <Text style={this.state.buttonTextStyle}>{this.props.content}</Text>
             </Button>
         );
