@@ -13,6 +13,8 @@ export default class Main extends Component<any> {
         super(props)
     }
 
+    // private interval;
+
     public state: { currentUser: User, otherUsers: string, isVerified: boolean } = {
         currentUser: undefined,
         otherUsers: "",
@@ -31,10 +33,24 @@ export default class Main extends Component<any> {
                     currentUser,
                     otherUsers: otherUsers.map(user => user.displayName || user.email).join(", "),
                     isVerified: currentUser.emailVerified
-                })
+                });
+                // this.watchIsVerifiedChanges();
             }
         });
     };
+
+    componentWillUnmount(): void {
+        // clearInterval(this.interval);
+    }
+
+    private watchIsVerifiedChanges(): void {
+        setInterval(() => {
+            auth().currentUser.reload().then(() => {
+                console.log("TUTAJ JEST NASZ SUPER LOG CZY JEST UŻYTKOWNIK ZWERYFKOWANY", auth().currentUser.emailVerified)
+            });
+            // this.interval = this.setState({...this.state, isVerified: auth().currentUser.emailVerified});
+        }, 3000);
+    }
 
     private logout(): void {
         auth().signOut().then(() => {
@@ -78,7 +94,7 @@ export default class Main extends Component<any> {
                         marginLeft: 50,
                         marginRight: 50
                     }}>
-                        <Text>Aby aplikacja była dostępna do użytkownia, należy najpierw zweryfkować
+                        <Text>Aby aplikacja była dostępna do użytkowania, należy najpierw zweryfkować
                             swój adres e-mail poprzez kliknięcie na link w otrzymanej wiadomości e-mail.
                             Jeżeli wiadomość nie dotarła, użyj opcji "Wyślij ponownie"</Text>
                     </View>

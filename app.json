@@ -3,7 +3,6 @@
     "name": "GoodPet",
     "slug": "good-pet-app",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
@@ -16,7 +15,7 @@
       "package": "com.entleteam.goodpet"
     },
     "androidNavigationBar": {
-      "visible": true
+      "visible": "immersive"
     },
     "splash": {
       "image": "./assets/splash.png",
